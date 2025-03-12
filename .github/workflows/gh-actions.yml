@@ -16,3 +16,4 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
+      - run: echo "GITHUB_REF $GITHUB_REF" && if [[ $GITHUB_REF = refs/tags/* && $(git branch --contains $GITHUB_REF | grep master) ]]; then echo "THIS IS A TAG FROM MASTER"; else echo "THIS IS NOT A TAG FROM MASTER"; fi
