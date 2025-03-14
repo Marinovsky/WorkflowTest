@@ -18,4 +18,4 @@ jobs:
       - run: echo "🍏 This job's status is ${{ job.status }}."
       - run: var=$(git rev-list -n 1 $GITHUB_REF) && echo "LAST COMMIT $var"
       - run: secondvar=$(git rev-list -n 1 refs/heads/main) && echo "MAIN LAST COMMIT $secondvar"
-      - run: echo "GITHUB_REF $GITHUB_REF" && if "$var" = "$secondvar" ; then echo "THIS IS A TAG FROM MASTER"; else echo "THIS IS NOT A TAG FROM MASTER"; fi
+      - run: echo "var $var" && if "$var" = "$secondvar" ; then echo "THIS IS A TAG FROM MASTER"; else echo "THIS IS NOT A TAG FROM MASTER"; fi
