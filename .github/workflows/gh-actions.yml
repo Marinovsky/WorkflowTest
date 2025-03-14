@@ -16,5 +16,5 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
-      - run: var=$(git rev-list -n 1 $GITHUB_REF) && echo "LAST COMMIT: $var"
+      - run: var=$(git rev-list -n 1 refs/tags/5) && echo "LAST COMMIT: $var"
       - run: echo "GITHUB_REF $GITHUB_REF" && if git branch --contains $(git rev-list -n 1 $GITHUB_REF) | grep -q main; then echo "THIS IS A TAG FROM MASTER"; else echo "THIS IS NOT A TAG FROM MASTER"; fi
