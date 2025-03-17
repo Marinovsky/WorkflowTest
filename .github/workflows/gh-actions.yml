@@ -12,7 +12,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Ensures we fetch all history
+          fetch-depth: 0  # Ensures we fetch all HISTORY
 
       - name: Get Last Commit of the Current Tag and the main tag
         run: taglastcommit=$(git rev-parse HEAD) && mainlastcommit=$(git rev-parse origin/main) && if [ "$taglastcommit" = "$mainlastcommit" ]; then echo "THIS IS A TAG FROM MASTER"; else echo "THIS IS NOT A TAG FROM MASTER"; fi
