@@ -15,4 +15,4 @@ jobs:
           fetch-depth: 0  # Ensures we fetch all history
 
       - name: Get Last Commit of the Current Tag and the main tag
-        run: echo "Tag Commit $(git rev-parse HEAD)" && echo "Main Branch Commit $(git rev-parse origin/main)"
+        run: taglastcommit=$(git rev-parse HEAD) && mainlastcommit=$(git rev-parse origin/main) && if [ "$taglastcommit" = "$mainlastcommit" ]; then echo "THIS IS A TAG FROM MASTER"; else echo "THIS IS NOT A TAG FROM MASTER"; fi
