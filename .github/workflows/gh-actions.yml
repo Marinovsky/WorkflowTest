@@ -1,20 +1,21 @@
-name: GitHub Actions Demo
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
-on: [push]
+name: Show Last Commits
+
+on:
+  push:
+    tags:
+      - '*'  # Runs when any tag is pushed
+
 jobs:
-  Explore-GitHub-Actions:
+  show-commits:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
-      - name: Check out repository code
+      - name: Checkout repository
         uses: actions/checkout@v4
-      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
-      - name: List files in the repository
-        run: |
-          ls ${{ github.workspace }}
-      - run: echo "🍏 This job's status is ${{ job.status }}."
-      - run: git branch --show-current
-      - run: echo "GITHUB_REF $GITHUB_REF" && if [[ $GITHUB_REF = refs/tags/* ]]; then var=$(git rev-list -n 1 $GITHUB_REF) && echo "LAST COMMIT $var" && git show $GITHUB_REF && secondvar=$(git rev-list -n 1 $var) && echo "MAIN LAST COMMIT $secondvar" && if [ "$var" = "$secondvar" ]; then echo "THIS IS A TAG FROM MASTER"; else echo "THIS IS NOT A TAG FROM MASTER"; fi; else echo "F"; fi
+        with:
+          fetch-depth: 0  # Ensures we fetch all history
+
+      - name: Get Last Commit of the Current Tag
+        run: echo "Tag Commit: $(git rev-parse HEAD)"
+
+      - name: Get Last Commit of the Main Branch
+        run: echo "Main Branch Commit: $(git rev-parse origin/main)"
