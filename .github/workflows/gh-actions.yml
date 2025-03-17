@@ -15,7 +15,7 @@ jobs:
           fetch-depth: 0  # Ensures we fetch all history
 
       - name: Get Last Commit of the Current Tag
-        run: echo "Tag Commit: $(git rev-parse HEAD)"
+        run: echo "Tag Commit $(git rev-parse HEAD)"
 
       - name: Get Last Commit of the Main Branch
-        run: echo "Main Branch Commit: $(git rev-parse origin/main)"
+        run: echo "Main Branch Commit $(git rev-parse origin/main)"
